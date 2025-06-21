@@ -1,0 +1,49 @@
+/* styles.css - Main stylesheet for the application */
+
+/* This ensures our game takes up the full screen without margins or scrollbars */
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+canvas {
+    display: block;
+}
+
+/* This is the main container for all UI elements.
+   It sits on top of the 3D canvas. */
+#ui-container {
+    position: absolute;
+    top: 20px; /* Add some padding from the top edge */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    pointer-events: none; /* Allows mouse clicks to pass through to the canvas */
+}
+
+/* Styles the score display to be a centered box at the top */
+#score-display {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-block; /* Allows us to center a block with margin auto */
+    margin: 0 auto; /* Horizontally center the box */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Ensures perfect centering */
+    text-shadow: 2px 2px 4px #000000;
+}
+
+/* Styles the controls display box at the bottom-left */
+#controls-display {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners for a modern look */
+    align-self: flex-start; /* Aligns this box to the left */
+} 

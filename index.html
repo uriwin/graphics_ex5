@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Interactive 3D Basketball Scene</title>
+		<!-- Link to the external stylesheet for UI elements -->
+		<link rel="stylesheet" href="src/assets/css/styles.css">
+		<!-- Three.js library from a CDN for performance and reliability -->
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'></script>
+	</head>
+	<body>
+		<!-- This container holds all the on-screen UI elements like score and controls -->
+		<div id="ui-container">
+			<!-- The score will be dynamically updated by Score.js -->
+			<div id="score-display"></div>
+			<!-- The controls instructions are dynamically updated by hw5.js -->
+			<div id="controls-display"></div>
+		</div>
+
+		<!-- The main entry point for the Three.js application -->
+		<script type="module" src="src/hw5.js"></script>
+	</body>
+</html>
