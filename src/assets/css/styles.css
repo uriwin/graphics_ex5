@@ -26,11 +26,11 @@ canvas {
 /* Styles the score display to be a centered box at the top */
 #score-display {
     text-align: center;
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px 25px;
+    border-radius: 12px;
     display: inline-block; /* Allows us to center a block with margin auto */
     margin: 0 auto; /* Horizontally center the box */
     position: absolute;
@@ -38,6 +38,35 @@ canvas {
     left: 50%;
     transform: translateX(-50%); /* Ensures perfect centering */
     text-shadow: 2px 2px 4px #000000;
+    min-width: 300px;
+}
+
+.score-main {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.score-stats {
+    font-size: 0.75em;
+    color: #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.score-stats span {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: normal;
+    white-space: nowrap;
 }
 
 /* Styles the controls display box at the bottom-left */
@@ -46,4 +75,99 @@ canvas {
     padding: 15px;
     border-radius: 8px; /* Rounded corners for a modern look */
     align-self: flex-start; /* Aligns this box to the left */
+}
+
+#power-bar-right {
+  position: fixed;
+  top: 80px;         /* Move further down */
+  right: 120px;      /* Move further left */
+  z-index: 100;
+  width: 320px;      /* Make the bar wider */
+  text-align: left;
+}
+
+#power-bar-label {
+  font-size: 1.3rem; /* Make the label bigger */
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+  font-family: inherit;
+}
+
+#power-bar-container {
+  width: 300px;      /* Make the bar itself wider */
+  height: 36px;      /* Make the bar taller */
+  background: #222;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 0 0 16px 0;
+  box-shadow: 0 2px 8px #0004;
+  position: relative;
+}
+
+#power-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f90 60%, #fa0 100%);
+  width: 50%; /* Will be updated by JS */
+  transition: width 0.1s;
+  border-radius: 18px 0 0 18px;
+  color: #fff;
+  text-align: center;
+  line-height: 36px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  user-select: none;
+  font-family: inherit;
+}
+
+/* Shot feedback message styles */
+.shot-feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px 40px;
+    border-radius: 15px;
+    text-shadow: 3px 3px 6px #000000;
+    animation: shotFeedback 2s ease-out forwards;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.shot-feedback.success {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: 3px solid #2E7D32;
+    box-shadow: 0 8px 32px rgba(76, 175, 80, 0.6);
+}
+
+.shot-feedback.miss {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+    border: 3px solid #b71c1c;
+    box-shadow: 0 8px 32px rgba(244, 67, 54, 0.6);
+}
+
+/* Animation for shot feedback */
+@keyframes shotFeedback {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
 } 

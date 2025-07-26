@@ -1,7 +1,7 @@
 import {OrbitControls} from './utils/OrbitControls.js'
 import {createCourtLines} from './components/CourtLines.js'
 import {createHoops} from './components/Hoops.js'
-import {createBasketball} from './components/Basketball.js'
+import { Basketball } from './components/Basketball.js'
 import {updateScoreDisplay} from './ui/Score.js'
 
 const scene = new THREE.Scene();
@@ -54,12 +54,11 @@ function createBasketballCourt() {
   
   createCourtLines(scene);
   createHoops(scene);
-  createBasketball(scene);
 }
 
 // --- Scene Assembly ---
 createBasketballCourt();
-
+const basketball = new Basketball(scene);
 
 // Set camera position for better view
 const cameraTranslate = new THREE.Matrix4();
@@ -76,11 +75,10 @@ const controlsElement = document.getElementById('controls-display');
 // This function updates the controls UI based on the current state.
 function updateControlsDisplay() {
     if (controlsElement) {
-        const status = isOrbitEnabled ? 'Enabled' : 'Locked';
         controlsElement.innerHTML = `
           <h3>Controls:</h3>
-          <p>O - Toggle orbit camera</p>
-          <p><strong>Status:</strong> ${status}</p>
+          <p>Arrows - Move | Space - Shoot | W/S - Power</p>
+          <p>R - Reset Ball | T - Reset Score | O - Camera</p>
         `;
     }
 }
@@ -107,6 +105,7 @@ function animate() {
   
   // Update controls
   controls.enabled = isOrbitEnabled;
+  basketball.update();
   controls.update();
   
   renderer.render(scene, camera);

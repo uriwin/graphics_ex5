@@ -14,7 +14,7 @@
 export function createCourtLines(scene) {
     const lineMaterial = new THREE.LineBasicMaterial({
         color: 0xffffff,
-        linewidth: 2 // Note: may not be effective on all WebGL renderers
+        linewidth: 2
     });
 
     createCenterLine(scene, lineMaterial);
