@@ -13,10 +13,8 @@
 
 ### Setup Instructions
 1. Clone this repository to your local machine
-2. Navigate to the project directory: `cd ex5`
-3. Install dependencies: `npm install`
-4. Start the local web server: `node index.js`
-5. Open your browser and go to http://localhost:8000
+2. Start the local web server: `node index.js`
+3. Open your browser and go to http://localhost:8000
 
 ## Complete List of Implemented Controls
 
