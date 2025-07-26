@@ -211,6 +211,9 @@ export class Basketball {
         }).catch(error => {
             console.error('Error tracking shot attempt:', error);
         });
+        
+        // Store which hoop we're targeting for missed shot detection
+        this.targetHoopX = targetX;
     }
 
     /**
@@ -250,7 +253,7 @@ export class Basketball {
         this.mesh.position.z += this.velocity.z * DT * PHYSICS_SPEED_MULTIPLIER;
         this.velocity.y += GRAVITY * DT;
 
-        // Check for collisions
+        // Check for collisions and real-time basket detection
         this._checkRimCollision();
         this._checkBasket();
         this._checkGroundCollision();
@@ -347,9 +350,6 @@ export class Basketball {
         if (this.mesh.position.y < BASKET_DETECTION_HEIGHT - BALL_RADIUS * 2) {
             this.basketDetected = false;
         }
-        
-        // Check for missed shots (ball went past the hoop without scoring)
-        this._checkMissedShot();
     }
 
     /**
@@ -370,44 +370,18 @@ export class Basketball {
         });
     }
 
-    /**
-     * Checks if the shot was missed (ball went past the hoop without scoring).
-     * @private
-     */
-    _checkMissedShot() {
-        // Only check for missed shots if we were shooting and haven't determined the shot result yet
-        if (!this.shooting || this.shotResultDetermined) {
-            return;
-        }
 
-        // Check if ball went past the hoop height without scoring
-        if (this.mesh.position.y < BASKET_DETECTION_HEIGHT - BALL_RADIUS * 3) {
-            // Check if ball was near any hoop when it went past
-            for (const hoopX of HOOP_X) {
-                const dx = this.mesh.position.x - hoopX;
-                const dz = this.mesh.position.z;
-                const horizontalDist = Math.sqrt(dx*dx + dz*dz);
-                
-                // If ball was within hoop area when it went past, it's a missed shot
-                if (horizontalDist < BASKET_DETECTION_RADIUS * 1.5) {
-                    this._showMissedShot();
-                    break;
-                }
-            }
-        }
-    }
 
     /**
      * Shows missed shot feedback.
      * @private
      */
     _showMissedShot() {
-        // Only show missed shot once per shooting attempt and only if no basket was made
-        if (this.shooting && !this.shotResultDetermined) {
+        // Only show missed shot if we haven't determined the result yet
+        if (!this.shotResultDetermined) {
             this.shotResultDetermined = true; // Mark that we've determined the shot result
             import('../ui/Score.js').then(scoreModule => {
                 scoreModule.showShotMissed();
-                // Note: We don't need to call addShotMade() here since it's already called in addHomeScore/addAwayScore
             }).catch(error => {
                 console.error('Error showing missed shot:', error);
             });
@@ -461,6 +435,11 @@ export class Basketball {
         this.velocity.x = 0;
         this.velocity.z = 0;
         this.shooting = false;
+        
+        // Only show missed shot if we haven't determined the result yet (meaning no basket was made)
+        if (!this.shotResultDetermined) {
+            this._showMissedShot();
+        }
     }
 
     /**
