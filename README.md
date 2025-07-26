@@ -75,35 +75,6 @@
 - **X-axis**: ±14.8m (prevents ball from going off court)
 - **Z-axis**: ±7.3m (prevents ball from going off court)
 
-## Additional Features Implemented
-
-### Comprehensive Scoring System
-- **Real-time Score Tracking**: Home vs. Away team scores
-- **Shot Statistics**: 
-  - Total Score (combined points)
-  - Shot Attempts counter
-  - Shots Made counter
-  - Shooting Percentage calculation
-- **Visual Feedback**: Success/miss messages with animations
-
-### Enhanced User Interface
-- **Power Bar**: Real-time visual indicator of shot power
-- **Controls Display**: Minimal, concise keyboard shortcuts
-- **Statistics Panel**: Multi-line display with all game metrics
-- **Shot Feedback**: Animated messages for successful and missed shots
-
-### Advanced Ball Behavior
-- **Smart Trajectory**: Ball arcs higher for close shots, moderate for distance
-- **Net Effect**: Ball falls straight down after scoring (no rim bouncing)
-- **Shot Result Tracking**: Prevents duplicate feedback messages
-- **Automatic Reset**: Ball returns to center after scoring
-
-### Visual Enhancements
-- **Textured Basketball**: Realistic basketball surface texture
-- **3D Court**: Complete basketball court with proper dimensions
-- **Lighting System**: Directional lighting for realistic shadows
-- **Camera Controls**: Orbital camera for different viewing angles
-
 ## Known Issues and Limitations
 
 ### Physics Limitations
